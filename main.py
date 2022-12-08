@@ -26,10 +26,10 @@ pygame.draw.line(screen, THECOLORS['black'], (50, 250), (350, 250), 5)
 
 
 def XO_draw():
-    for x in Xs:
-        pygame.draw.circle(screen, THECOLORS['firebrick1'], x, 40, 4)
     for o in Os:
-        pygame.draw.circle(screen, THECOLORS['blue'], o, 40, 4)
+        pygame.draw.circle(screen, THECOLORS['firebrick1'], o, 40, 4)
+    for x in Xs:
+        pygame.draw.line(screen, THECOLORS['blue'], x[0], x[1], 4)
 
 
 while True:
@@ -43,7 +43,8 @@ while True:
             for i in range(9):
                 if areas[i][0] < mouse[0] < areas[i][1] and areas[i][2] < mouse[1] < areas[i][3]:
                     if step % 2 == 0:
-                        Xs.append([(areas[i][0] + areas[i][1]) / 2, (areas[i][2] + areas[i][3]) / 2])
+                        Xs.append([[areas[i][0]+10, areas[i][2]+10], [areas[i][1]-10, areas[i][3]-10]])
+                        Xs.append([[areas[i][1]-10, areas[i][2]+10], [areas[i][0]+10, areas[i][3]-10]])
                     else:
                         Os.append([(areas[i][0] + areas[i][1]) / 2, (areas[i][2] + areas[i][3]) / 2])
                     step += 1
